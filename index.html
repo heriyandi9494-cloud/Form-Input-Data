@@ -2,589 +2,210 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <base target="_top">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Form Data Username</title>
-
+  <title>Formulir Online</title>
   <style>
-    :root {
-      --bg: #080b16;
-      --panel: #11182a;
-      --cyan: #00f5ff;
-      --purple: #a855f7;
-      --green: #39ff88;
-      --text: #f1f5ff;
-      --muted: #9aa8c7;
-      --border: rgba(0, 245, 255, .23);
-    }
-
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
       min-height: 100vh;
-      padding: 24px 14px 40px;
-      font-family: Arial, Helvetica, sans-serif;
-      color: var(--text);
+      padding: 30px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      color: #f5f7ff;
       background:
-        radial-gradient(ellipse at top left, #15294a 0, transparent 42%),
-        radial-gradient(ellipse at bottom right, #29133e 0, transparent 38%),
-        var(--bg);
+        radial-gradient(circle at top, #26356a, transparent 50%),
+        #080d1b;
     }
 
     .container {
-      max-width: 920px;
-      margin: auto;
-    }
-
-    .header {
-      text-align: center;
-      margin: 10px 0 28px;
+      width: 100%;
+      max-width: 460px;
+      padding: 30px;
+      border: 1px solid #35477a;
+      border-radius: 22px;
+      background: rgba(16, 24, 48, .96);
+      box-shadow: 0 18px 60px #0007;
     }
 
     .logo {
-      display: inline-flex;
-      width: 66px;
-      height: 66px;
-      align-items: center;
-      justify-content: center;
-      font-size: 30px;
-      border: 1px solid var(--cyan);
-      border-radius: 20px;
-      background: #0d1d30;
-      box-shadow: 0 0 25px #00f5ff35;
-    }
-
-    h1 {
-      margin: 17px 0 8px;
-      font-size: clamp(25px, 5vw, 36px);
-      letter-spacing: 1px;
-      color: var(--cyan);
-      text-shadow: 0 0 18px #00f5ff40;
-    }
-
-    .subtitle {
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    .panel {
-      padding: clamp(18px, 4vw, 30px);
-      margin-bottom: 22px;
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      background: linear-gradient(145deg, #121b30f5, #0d1222f5);
-      box-shadow: 0 12px 40px #0005, inset 0 1px #ffffff08;
-    }
-
-    .panel-title {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      margin: 0 0 22px;
-      font-size: 19px;
-    }
-
-    .panel-title span { color: var(--cyan); }
-
-    .form-grid {
+      width: 58px;
+      height: 58px;
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
+      place-items: center;
+      margin-bottom: 18px;
+      border-radius: 17px;
+      background: #233d79;
+      font-size: 28px;
     }
 
-    .field { min-width: 0; }
-
-    .field.full { grid-column: 1 / -1; }
+    h1 { margin: 0 0 10px; font-size: 27px; }
+    .subtitle {
+      margin: 0 0 25px;
+      color: #aab6d4;
+      line-height: 1.6;
+      font-size: 14px;
+    }
 
     label {
       display: block;
-      margin-bottom: 8px;
+      margin: 17px 0 8px;
       font-size: 13px;
       font-weight: bold;
-      color: #dce7ff;
+      color: #dbe4ff;
     }
 
-    .required { color: var(--cyan); }
-
-    input {
-      display: block;
+    input, textarea {
       width: 100%;
-      min-width: 0;
       padding: 13px 14px;
-      color: #fff;
-      font-size: 14px;
-      border: 1px solid #34415f;
+      border: 1px solid #35466d;
       border-radius: 10px;
       outline: none;
-      background: #080e1c;
-      transition: border .2s, box-shadow .2s;
+      background: #0c1429;
+      color: white;
+      font: inherit;
     }
 
-    input:focus {
-      border-color: var(--cyan);
-      box-shadow: 0 0 0 3px #00f5ff15;
+    input:focus, textarea:focus {
+      border-color: #83a5ff;
+      box-shadow: 0 0 0 3px #5379ff22;
     }
 
-    input::placeholder { color: #657391; }
-
-    .hint {
-      margin-top: 7px;
-      font-size: 11px;
-      line-height: 1.5;
-      color: var(--muted);
-    }
-
-    .buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 23px;
-    }
+    textarea { min-height: 100px; resize: vertical; }
 
     button {
-      padding: 13px 18px;
-      min-height: 46px;
-      flex: 1 1 150px;
-      border: 1px solid transparent;
-      border-radius: 10px;
+      width: 100%;
+      margin-top: 22px;
+      padding: 14px;
+      border: 0;
+      border-radius: 11px;
+      background: linear-gradient(100deg, #4776ff, #8055ed);
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
       cursor: pointer;
-      font-size: 13px;
-      font-weight: bold;
-      transition: transform .15s, opacity .15s;
     }
 
-    button:hover { transform: translateY(-2px); }
-    button:disabled { opacity: .55; cursor: wait; transform: none; }
+    button:disabled { opacity: .6; cursor: wait; }
 
-    .btn-save {
-      color: #06111b;
-      background: linear-gradient(100deg, var(--cyan), #79faff);
-      box-shadow: 0 0 18px #00f5ff22;
-    }
-
-    .btn-copy {
-      color: #fff;
-      border-color: #a855f780;
-      background: linear-gradient(100deg, #6928b8, #922fe0);
-    }
-
-    .btn-reset {
-      color: #dce7ff;
-      border-color: #45516c;
-      background: #182137;
-    }
-
-    .status {
-      display: none;
-      padding: 13px 15px;
-      margin-top: 17px;
+    #status {
+      margin-top: 16px;
+      padding: 12px;
       border-radius: 10px;
+      display: none;
       font-size: 13px;
       line-height: 1.6;
       overflow-wrap: anywhere;
     }
 
-    .status.show { display: block; }
-    .status.success {
-      color: #a5ffca;
-      border: 1px solid #39ff8860;
-      background: #39ff8810;
-    }
-
-    .status.error {
-      color: #ffb4bd;
-      border: 1px solid #ff5c7960;
-      background: #ff5c7910;
-    }
-
-    .status.info {
-      color: #b5faff;
-      border: 1px solid #00f5ff55;
-      background: #00f5ff0b;
-    }
-
-    .result-card {
-      overflow: hidden;
-      border: 1px solid #a855f75a;
-      border-radius: 18px;
-      background: linear-gradient(145deg, #15172b, #0d1221);
-      box-shadow: 0 0 28px #a855f710;
-    }
-
-    .result-heading {
-      padding: 18px 20px;
-      border-bottom: 1px solid #a855f730;
-      background: #a855f710;
-    }
-
-    .result-heading h3 {
-      margin: 0 0 5px;
-      font-size: 17px;
-      color: #d8b4fe;
-    }
-
-    .result-heading p {
-      margin: 0;
+    .note {
+      margin-top: 20px;
+      color: #8795b7;
       font-size: 12px;
-      color: var(--muted);
-    }
-
-    .result-body { padding: 12px 20px; }
-
-    .result-row {
-      display: grid;
-      grid-template-columns: minmax(120px, 0.9fr) minmax(0, 1.2fr);
-      gap: 14px;
-      padding: 13px 0;
-      border-bottom: 1px solid #ffffff0d;
-      font-size: 13px;
       line-height: 1.6;
-    }
-
-    .result-row:last-child { border-bottom: none; }
-
-    .result-label { color: var(--muted); }
-
-    .result-value {
-      min-width: 0;
-      text-align: right;
-      font-weight: bold;
-      color: #f2f6ff;
-      overflow-wrap: anywhere;
-      white-space: pre-wrap;
-    }
-
-    .empty {
-      padding: 30px 12px;
       text-align: center;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.8;
-    }
-
-    .footer {
-      text-align: center;
-      padding-top: 4px;
-      color: #7785a4;
-      font-size: 11px;
-      line-height: 1.7;
-    }
-
-    @media (max-width: 560px) {
-      body { padding: 15px 10px 28px; }
-      .form-grid { grid-template-columns: 1fr; gap: 15px; }
-      .field.full { grid-column: auto; }
-      .panel { border-radius: 15px; }
-      .result-row { grid-template-columns: 1fr; gap: 3px; }
-      .result-value { text-align: left; }
-      button { flex-basis: 100%; }
     }
   </style>
 </head>
-
 <body>
   <main class="container">
-    <header class="header">
-      <div class="logo">◈</div>
-      <h1>DATA USERNAME</h1>
-      <div class="subtitle">
-        Form input data dan penyimpanan terpusat<br>
-        Masukkan informasi, simpan, lalu salin hasilnya.
-      </div>
-    </header>
+    <div class="logo">✦</div>
+    <h1>Formulir Online</h1>
+    <p class="subtitle">
+      Silakan isi data dengan benar, kemudian tekan tombol
+      kirim untuk meneruskan data ke sistem.
+    </p>
 
-    <section class="panel">
-      <h2 class="panel-title"><span>▣</span> Form Input Data</h2>
+    <form id="dataForm">
+      <label for="username">Username</label>
+      <input id="username" name="username"
+        placeholder="Masukkan username" required maxlength="100">
 
-      <form id="dataForm" autocomplete="off">
-        <div class="form-grid">
-          <div class="field">
-            <label for="username">Username <span class="required">*</span></label>
-            <input id="username" name="username" required maxlength="500"
-              placeholder="Contoh: erg">
-          </div>
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email"
+        placeholder="nama@email.com" required maxlength="200">
 
-          <div class="field">
-            <label for="rekening">Nomor Rekening <span class="required">*</span></label>
-            <input id="rekening" name="rekening" required maxlength="500"
-              inputmode="numeric" placeholder="Contoh: 2134567">
-          </div>
+      <label for="pesan">Pesan</label>
+      <textarea id="pesan" name="pesan"
+        placeholder="Tulis pesan di sini" required maxlength="3000"></textarea>
 
-          <div class="field">
-            <label for="namaRekening">Nama Rekening <span class="required">*</span></label>
-            <input id="namaRekening" name="namaRekening" required maxlength="500"
-              placeholder="Masukkan nama pemilik rekening">
-          </div>
+      <button id="submitBtn" type="submit">KIRIM DATA →</button>
+      <div id="status" role="status" aria-live="polite"></div>
+    </form>
 
-          <div class="field">
-            <label for="bank">Nama Bank <span class="required">*</span></label>
-            <input id="bank" name="bank" required maxlength="500"
-              placeholder="Contoh: BCA">
-          </div>
-
-          <div class="field">
-            <label for="email">Email <span class="required">*</span></label>
-            <input id="email" name="email" type="text" required maxlength="500"
-              placeholder="Masukkan email">
-          </div>
-
-          <div class="field">
-            <label for="hp">No HP <span class="required">*</span></label>
-            <input id="hp" name="hp" required maxlength="500"
-              inputmode="tel" placeholder="Contoh: 0987654">
-          </div>
-
-          <div class="field">
-            <label for="saldo">Saldo Terakhir <span class="required">*</span></label>
-            <input id="saldo" name="saldo" required maxlength="500"
-              inputmode="decimal" placeholder="Contoh: 900">
-          </div>
-
-          <div class="field">
-            <label for="login">Terakhir Login <span class="required">*</span></label>
-            <input id="login" name="login" required maxlength="500"
-              placeholder="Contoh: 21:30">
-          </div>
-
-          <div class="field full">
-            <label for="pasaran">Terakhir Bet di Pasaran Apa? <span class="required">*</span></label>
-            <input id="pasaran" name="pasaran" required maxlength="500"
-              placeholder="Contoh: SGP">
-          </div>
-        </div>
-
-        <div class="buttons">
-          <button class="btn-save" id="saveBtn" type="submit">
-            ↗ KIRIM & SIMPAN
-          </button>
-          <button class="btn-copy" id="copyBtn" type="button">
-            ▣ SALIN DATA
-          </button>
-          <button class="btn-reset" id="resetBtn" type="button">
-            ↻ RESET FORM
-          </button>
-        </div>
-
-        <div id="status" class="status" role="status" aria-live="polite"></div>
-      </form>
-    </section>
-
-    <section class="panel">
-      <h2 class="panel-title"><span>▤</span> Hasil Data Lengkap</h2>
-
-      <div class="result-card">
-        <div class="result-heading">
-          <h3>▰ DETAIL INFORMASI</h3>
-          <p>Pratinjau data yang siap disalin</p>
-        </div>
-
-        <div id="resultBody" class="empty">
-          Form belum diisi.<br>
-          Isi data di atas untuk menampilkan hasil lengkap.
-        </div>
-      </div>
-
-      <div class="buttons">
-        <button class="btn-copy" id="copyResultBtn" type="button">
-          ▣ SALIN HASIL LENGKAP
-        </button>
-      </div>
-    </section>
-
-    <footer class="footer">
-      DATA USERNAME · GOOGLE SHEETS DATABASE<br>
-      Reset formulir tidak menghapus data yang sudah tersimpan.
-    </footer>
+    <p class="note">
+      Formulir ini menggunakan Google Apps Script untuk
+      meneruskan data ke Google Sheets.
+    </p>
   </main>
 
   <script>
-    const form = document.getElementById('dataForm');
-    const resultBody = document.getElementById('resultBody');
-    const statusBox = document.getElementById('status');
-    const saveBtn = document.getElementById('saveBtn');
+    const SCRIPT_URL = "GANTI_DENGAN_URL_WEB_APP";
 
-    const fields = [
-      { id: 'username', label: 'username' },
-      { id: 'rekening', label: 'nomor rekening' },
-      { id: 'namaRekening', label: 'nama rekening' },
-      { id: 'bank', label: 'nama bank' },
-      { id: 'email', label: 'email' },
-      { id: 'hp', label: 'no hp' },
-      { id: 'saldo', label: 'saldo terakhir' },
-      { id: 'login', label: 'terakhir login' },
-      { id: 'pasaran', label: 'terakhir bet dipasaran apa' }
-    ];
+    const form = document.getElementById("dataForm");
+    const button = document.getElementById("submitBtn");
+    const statusBox = document.getElementById("status");
 
-    let dataTersimpan = false;
-
-    function ambilData() {
-      const data = {};
-      fields.forEach(function(field) {
-        data[field.id] = document.getElementById(field.id).value.trim();
-      });
-      return data;
+    function showStatus(message, color) {
+      statusBox.style.display = "block";
+      statusBox.style.background = "#ffffff0d";
+      statusBox.style.color = color;
+      statusBox.textContent = message;
     }
 
-    function dataLengkap(data) {
-      return fields.every(function(field) {
-        return data[field.id] !== '';
-      });
-    }
-
-    function teksData(data) {
-      return fields.map(function(field) {
-        return field.label + ' : ' + data[field.id];
-      }).join('\n');
-    }
-
-    function tampilkanHasil(data) {
-      resultBody.className = 'result-body';
-      resultBody.replaceChildren();
-
-      fields.forEach(function(field) {
-        const row = document.createElement('div');
-        row.className = 'result-row';
-
-        const label = document.createElement('div');
-        label.className = 'result-label';
-        label.textContent = field.label;
-
-        const value = document.createElement('div');
-        value.className = 'result-value';
-        value.textContent = data[field.id] || '—';
-
-        row.append(label, value);
-        resultBody.appendChild(row);
-      });
-    }
-
-    function tampilkanStatus(pesan, jenis) {
-      statusBox.textContent = pesan;
-      statusBox.className = 'status show ' + jenis;
-    }
-
-    function dataDariFormBerubah() {
-      dataTersimpan = false;
-      const data = ambilData();
-
-      tampilkanHasil(data);
-
-      if (dataLengkap(data)) {
-        tampilkanStatus(
-          'Pratinjau diperbarui. Klik KIRIM & SIMPAN untuk menyimpan sebagai baris baru.',
-          'info'
-        );
-      } else {
-        statusBox.className = 'status';
-      }
-    }
-
-    form.addEventListener('input', dataDariFormBerubah);
-
-    form.addEventListener('submit', function(event) {
+    form.addEventListener("submit", async function(event) {
       event.preventDefault();
 
-      const data = ambilData();
-
-      if (!dataLengkap(data)) {
-        tampilkanStatus('Mohon isi semua kolom terlebih dahulu.', 'error');
+      if (!SCRIPT_URL.startsWith("https://script.google.com/")) {
+        showStatus("Masukkan URL Web App Apps Script yang benar.", "#ffaaaa");
         return;
       }
 
-      if (!/^\d+([.,]\d+)?$/.test(data.saldo)) {
-        tampilkanStatus('Saldo harus berupa angka, misalnya 900 atau 900.50.', 'error');
-        document.getElementById('saldo').focus();
+      const data = {
+        username: document.getElementById("username").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        pesan: document.getElementById("pesan").value.trim()
+      };
+
+      if (!data.username || !data.email || !data.pesan) {
+        showStatus("Mohon isi semua kolom.", "#ffaaaa");
         return;
       }
 
-      saveBtn.disabled = true;
-      saveBtn.textContent = '⏳ SEDANG MENYIMPAN...';
-      tampilkanStatus('Sedang menyimpan data ke Google Sheets...', 'info');
-
-      google.script.run
-        .withSuccessHandler(function(result) {
-          saveBtn.disabled = false;
-          saveBtn.textContent = '↗ KIRIM & SIMPAN';
-
-          if (result && result.success) {
-            dataTersimpan = true;
-            tampilkanStatus(
-              '✓ ' + result.message +
-              ' Nomor data: ' + result.nomor +
-              '. Waktu simpan: ' + result.waktu +
-              '. Data tetap tersimpan meskipun formulir di-reset.',
-              'success'
-            );
-          } else {
-            tampilkanStatus('Respons penyimpanan tidak dikenali. Periksa Google Sheets.', 'error');
-          }
-        })
-        .withFailureHandler(function(error) {
-          saveBtn.disabled = false;
-          saveBtn.textContent = '↗ KIRIM & SIMPAN';
-          tampilkanStatus(
-            'Gagal menyimpan: ' +
-            (error && error.message ? error.message : 'Terjadi kesalahan.') +
-            ' Periksa izin Apps Script dan koneksi.',
-            'error'
-          );
-        })
-        .simpanData(data);
-    });
-
-    async function salinData() {
-      const data = ambilData();
-
-      if (!dataLengkap(data)) {
-        tampilkanStatus('Isi semua kolom sebelum menyalin data.', 'error');
-        return;
-      }
+      button.disabled = true;
+      button.textContent = "MENGIRIM...";
+      showStatus("Mengirim permintaan ke Google Apps Script...", "#dce6ff");
 
       try {
-        await navigator.clipboard.writeText(teksData(data));
-        tampilkanStatus('✓ Semua data berhasil disalin. Silakan tempel di tempat yang diinginkan.', 'success');
+        const body = new URLSearchParams();
+        body.append("payload", JSON.stringify(data));
+
+        await fetch(SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          body: body
+        });
+
+        showStatus(
+          "Permintaan pengiriman telah dikirim. Karena browser membatasi pembacaan respons, status penyimpanan belum dapat dipastikan. Periksa tab Data di Google Sheets sebelum mengirim ulang.",
+          "#ffe29a"
+        );
+
+        form.reset();
       } catch (error) {
-        const area = document.createElement('textarea');
-        area.value = teksData(data);
-        area.style.position = 'fixed';
-        area.style.opacity = '0';
-        document.body.appendChild(area);
-        area.select();
-
-        try {
-          const berhasil = document.execCommand('copy');
-          if (!berhasil) throw new Error('Salin gagal');
-
-          tampilkanStatus('✓ Semua data berhasil disalin.', 'success');
-        } catch (e) {
-          tampilkanStatus('Browser menolak akses salin. Pilih dan salin teks hasil secara manual.', 'error');
-        } finally {
-          area.remove();
-        }
+        showStatus(
+          "Pengiriman gagal dimulai. Periksa koneksi internet dan URL Apps Script, lalu coba lagi.",
+          "#ffaaaa"
+        );
+      } finally {
+        button.disabled = false;
+        button.textContent = "KIRIM DATA →";
       }
-    }
-
-    document.getElementById('copyBtn').addEventListener('click', salinData);
-    document.getElementById('copyResultBtn').addEventListener('click', salinData);
-
-    document.getElementById('resetBtn').addEventListener('click', function() {
-      form.reset();
-      dataTersimpan = false;
-
-      resultBody.className = 'empty';
-      resultBody.textContent =
-        'Form telah direset. Data yang pernah dikirim tetap tersimpan di Google Sheets.';
-
-      tampilkanStatus(
-        'Form berhasil dikosongkan. Data yang sudah dikirim tidak dihapus.',
-        'success'
-      );
     });
-
-    tampilkanHasil(ambilData());
   </script>
 </body>
 </html>
